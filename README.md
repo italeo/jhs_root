@@ -1,2 +1,3 @@
-# jhs_root
-The data analysis interface for the jhg (initial test tun)
+# JHS Project
+
+This project is a combination of a Vue.js frontend and a Python backend using Flask and Dash.

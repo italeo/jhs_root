@@ -1,0 +1,66 @@
+GAME	INFO	HWTC	2/23/2021, 9:17:10 PM	1614115030410	server.js	Game created by 6b84e10c-e362-435d-8f5c-83c59e39423a	
+GAME	INFO	HWTC	2/23/2021, 9:17:10 PM	1614115030407	create-game.service.js	Game created	
+GAME	INFO	HWTC	2/23/2021, 9:17:10 PM	1614115030585	server.js	Client 6b84e10c-e362-435d-8f5c-83c59e39423a joined game to observe	
+GAME	INFO	HWTC	2/23/2021, 9:17:16 PM	1614115036544	server.js	Client f6845251-1870-4242-978e-dd6da78442f8 joined game to play	
+GAME	INFO	HWTC	2/23/2021, 9:17:18 PM	1614115038073	server.js	Client c75e475e-1165-4f9b-b01c-9eac9dbc7890 joined game to observe	
+GAME	INFO	HWTC	2/23/2021, 9:17:19 PM	1614115039966	server.js	Client 46025b0d-8541-4aa5-a4bc-d76c33557455 joined game to play	
+GAME	INFO	HWTC	2/23/2021, 9:17:37 PM	1614115057748	server.js	Client 0682bd29-8c31-4970-8dd5-f2143b3fcf19 joined game to play	
+GAME	INFO	HWTC	2/23/2021, 9:17:41 PM	1614115061770	server.js	Client 51d53b2a-518c-4afe-9354-091b83fa0c79 joined game to observe	
+GAME	INFO	HWTC	2/23/2021, 9:17:53 PM	1614115073803	graph.service.js	All graphs are initialized	
+GAME	INFO	HWTC	2/23/2021, 9:17:53 PM	1614115073843	server.js	Clients notified that game started	
+GAME	INFO	HWTC	2/23/2021, 9:17:53 PM	1614115073844	start-game.service.js	Game started	
+GAME	DEBUG	HWTC	2/23/2021, 9:17:53 PM	1614115073875	server.js	Round 1 timer started	
+GAME	INFO	HWTC	2/23/2021, 9:18:15 PM	1614115095607	transaction.service.js	Player Lemuel submitted tokens	
+GAME	INFO	HWTC	2/23/2021, 9:18:17 PM	1614115097952	transaction.service.js	Player Laman submitted tokens	
+GAME	INFO	HWTC	2/23/2021, 9:18:40 PM	1614115120527	transaction.service.js	Player Amulek submitted tokens	
+GAME	DEBUG	HWTC	2/23/2021, 9:18:40 PM	1614115120725	server.js	Round 1 timer stopped	
+GAME	INFO	HWTC	2/23/2021, 9:18:40 PM	1614115120728	server.js	Game completed round 1	
+GAME	DEBUG	HWTC	2/23/2021, 9:18:40 PM	1614115120760	server.js	Round 2 timer started	
+GAME	INFO	HWTC	2/23/2021, 9:19:04 PM	1614115144230	transaction.service.js	Player Laman submitted tokens	
+GAME	INFO	HWTC	2/23/2021, 9:19:13 PM	1614115153806	transaction.service.js	Player Amulek submitted tokens	
+GAME	INFO	HWTC	2/23/2021, 9:19:23 PM	1614115163541	transaction.service.js	Player Lemuel submitted tokens	
+GAME	INFO	HWTC	2/23/2021, 9:19:23 PM	1614115163764	server.js	Game completed round 2	
+GAME	DEBUG	HWTC	2/23/2021, 9:19:23 PM	1614115163762	server.js	Round 2 timer stopped	
+GAME	DEBUG	HWTC	2/23/2021, 9:19:23 PM	1614115163790	server.js	Round 3 timer started	
+GAME	INFO	HWTC	2/23/2021, 9:19:35 PM	1614115175587	transaction.service.js	Player Amulek submitted tokens	
+GAME	INFO	HWTC	2/23/2021, 9:19:36 PM	1614115176773	transaction.service.js	Player Laman submitted tokens	
+GAME	INFO	HWTC	2/23/2021, 9:19:45 PM	1614115185115	transaction.service.js	Player Lemuel submitted tokens	
+GAME	INFO	HWTC	2/23/2021, 9:19:45 PM	1614115185271	server.js	Game completed round 3	
+GAME	DEBUG	HWTC	2/23/2021, 9:19:45 PM	1614115185269	server.js	Round 3 timer stopped	
+GAME	DEBUG	HWTC	2/23/2021, 9:19:45 PM	1614115185303	server.js	Round 4 timer started	
+GAME	INFO	HWTC	2/23/2021, 9:19:53 PM	1614115193234	transaction.service.js	Player Lemuel submitted tokens	
+GAME	INFO	HWTC	2/23/2021, 9:19:58 PM	1614115198771	transaction.service.js	Player Laman submitted tokens	
+GAME	INFO	HWTC	2/23/2021, 9:20:02 PM	1614115202719	transaction.service.js	Player Amulek submitted tokens	
+GAME	INFO	HWTC	2/23/2021, 9:20:02 PM	1614115202976	server.js	Game completed round 4	
+GAME	DEBUG	HWTC	2/23/2021, 9:20:02 PM	1614115202972	server.js	Round 4 timer stopped	
+GAME	DEBUG	HWTC	2/23/2021, 9:20:03 PM	1614115203070	server.js	Round 5 timer started	
+GAME	INFO	HWTC	2/23/2021, 9:20:14 PM	1614115214541	transaction.service.js	Player Lemuel submitted tokens	
+GAME	INFO	HWTC	2/23/2021, 9:20:18 PM	1614115218642	transaction.service.js	Player Amulek submitted tokens	
+GAME	INFO	HWTC	2/23/2021, 9:20:43 PM	1614115243096	transaction.service.js	Player Laman submitted tokens	
+GAME	DEBUG	HWTC	2/23/2021, 9:20:43 PM	1614115243366	server.js	Round 5 timer stopped	
+GAME	INFO	HWTC	2/23/2021, 9:20:43 PM	1614115243368	server.js	Game completed round 5	
+GAME	DEBUG	HWTC	2/23/2021, 9:20:43 PM	1614115243430	server.js	Round 6 timer started	
+GAME	INFO	HWTC	2/23/2021, 9:20:53 PM	1614115253128	transaction.service.js	Player Amulek submitted tokens	
+GAME	INFO	HWTC	2/23/2021, 9:20:56 PM	1614115256422	transaction.service.js	Player Lemuel submitted tokens	
+GAME	INFO	HWTC	2/23/2021, 9:21:51 PM	1614115311108	transaction.service.js	Player Laman submitted tokens	
+GAME	INFO	HWTC	2/23/2021, 9:21:51 PM	1614115311397	server.js	Game completed round 6	
+GAME	DEBUG	HWTC	2/23/2021, 9:21:51 PM	1614115311395	server.js	Round 6 timer stopped	
+GAME	DEBUG	HWTC	2/23/2021, 9:21:51 PM	1614115311456	server.js	Round 7 timer started	
+GAME	INFO	HWTC	2/23/2021, 9:22:00 PM	1614115320320	transaction.service.js	Player Laman submitted tokens	
+GAME	INFO	HWTC	2/23/2021, 9:22:09 PM	1614115329887	transaction.service.js	Player Lemuel submitted tokens	
+GAME	INFO	HWTC	2/23/2021, 9:22:46 PM	1614115366565	user.service.js	Client 0682bd29-8c31-4970-8dd5-f2143b3fcf19 left the game	
+GAME	INFO	HWTC	2/23/2021, 9:22:46 PM	1614115366571	server.js	Successfully killed  client 0682bd29-8c31-4970-8dd5-f2143b3fcf19 (play)	
+GAME	INFO	HWTC	2/23/2021, 9:22:52 PM	1614115372350	user.service.js	Client 0682bd29-8c31-4970-8dd5-f2143b3fcf19 returned to the game	
+GAME	INFO	HWTC	2/23/2021, 9:22:52 PM	1614115372351	server.js	Successfully resurrected client 0682bd29-8c31-4970-8dd5-f2143b3fcf19 (play)	
+GAME	INFO	HWTC	2/23/2021, 9:24:11 PM	1614115451618	server.js	Round 7 timed out	
+GAME	INFO	HWTC	2/23/2021, 9:24:11 PM	1614115451682	transaction.service.js	1 players were dead at end of round 7 and their tokens were auto-submitted (after round timeout)	
+GAME	INFO	HWTC	2/23/2021, 9:24:11 PM	1614115451929	server.js	Game completed round 7 (round timed out)	
+GAME	DEBUG	HWTC	2/23/2021, 9:24:11 PM	1614115451927	server.js	Round 7 timer stopped	
+GAME	DEBUG	HWTC	2/23/2021, 9:24:11 PM	1614115451988	server.js	Round 8 timer started	
+GAME	INFO	HWTC	2/23/2021, 9:24:30 PM	1614115470943	transaction.service.js	Player Laman submitted tokens	
+GAME	INFO	HWTC	2/23/2021, 9:24:51 PM	1614115491362	transaction.service.js	Player Lemuel submitted tokens	
+GAME	INFO	HWTC	2/23/2021, 9:25:56 PM	1614115556078	transaction.service.js	Player Amulek submitted tokens	
+GAME	INFO	HWTC	2/23/2021, 9:25:56 PM	1614115556439	server.js	Game completed round 8	
+GAME	DEBUG	HWTC	2/23/2021, 9:25:56 PM	1614115556436	server.js	Round 8 timer stopped	
+GAME	DEBUG	HWTC	2/23/2021, 9:25:56 PM	1614115556518	server.js	Round 9 timer started	
+GAME	INFO	HWTC	2/23/2021, 9:26:07 PM	1614115567225	transaction.service.js	Player Laman submitted tokens	
