@@ -1,7 +1,9 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import os
 import zipfile
 import shutil
+from graphs.cluster_graph import create_cluster_chat_graph  # Ensure this path is correct
+import plotly.io as pio
 
 app = Flask(__name__)
 
@@ -64,6 +66,36 @@ def upload_file():
         return jsonify({"files": csv_and_txt_files, "all_files": all_files}), 200
     else:
         return jsonify({"error": "Uploaded file is not a valid zip file"}), 400
+
+@app.route("/api/generate_graph", methods=["POST"])
+def generate_graph():
+    data = request.json
+    graph_type = data.get('graph_type', 'cluster_chat_graph')
+
+    # Dynamically find the relevant CSV file
+    file_path = None
+    for root, dirs, files in os.walk(TEMP_DIR):
+        for file in files:
+            if file.endswith('messages-dataset.csv'):  # Ensure your CSV is correctly named
+                file_path = os.path.join(root, file)
+                break
+
+    if not file_path:
+        print("File path not found.")
+        return jsonify({"error": "Required CSV file not found"}), 400
+
+    try:
+        if graph_type == 'cluster_chat_graph':
+            fig = create_cluster_chat_graph(file_path)
+            graph_json = pio.to_json(fig)
+            print("Graph JSON data:", graph_json)  # Useful for debugging
+            return jsonify({"graph": graph_json}), 200
+        else:
+            print("Unknown graph type.")
+            return jsonify({"error": "Unknown graph type"}), 400
+    except Exception as e:
+        print(f"Error generating graph: {e}")
+        return jsonify({"error": f"Failed to generate graph: {str(e)}"}), 500
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5001, debug=True)

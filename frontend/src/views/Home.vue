@@ -3,7 +3,9 @@
     <!-- Navigation Bar -->
     <nav class="navbar">
       <div class="navbar-content">
-        <h1 class="navbar-title">Junior High Sociogram</h1>
+        <h1 class="navbar-title" @click="goToHomePage">
+          Junior High Sociogram
+        </h1>
         <ul class="navbar-links">
           <li><a href="#">About</a></li>
           <li><a href="#">Graphs</a></li>
@@ -24,14 +26,6 @@
       <button class="upload-button" @click="triggerFileInput">
         Upload File
       </button>
-
-      <!-- Display the list of CSV and TXT files -->
-      <div v-if="uploadedFiles.length > 0" class="uploaded-files">
-        <h3>Uploaded CSV and TXT Files:</h3>
-        <ul>
-          <li v-for="file in uploadedFiles" :key="file">{{ file }}</li>
-        </ul>
-      </div>
     </section>
   </div>
 </template>
@@ -42,7 +36,6 @@ export default {
   data() {
     return {
       selectedFile: null,
-      uploadedFiles: [], // Array to store the file list
     };
   },
   methods: {
@@ -62,9 +55,6 @@ export default {
       const formData = new FormData();
       formData.append("file", this.selectedFile);
 
-      // Clear the previous file list
-      this.uploadedFiles = [];
-
       try {
         const response = await fetch("/api/upload", {
           method: "POST",
@@ -74,7 +64,10 @@ export default {
         if (response.ok) {
           const data = await response.json();
           if (data.files && data.files.length > 0) {
-            this.uploadedFiles = data.files; // Store the returned files
+            this.$router.push({
+              name: "DataPage",
+              params: { files: data.files }, // Correctly pass files as route params
+            });
           } else {
             alert("No CSV or TXT files found in the uploaded ZIP.");
           }
@@ -85,6 +78,9 @@ export default {
         console.error("Error uploading file:", error);
         alert("Error uploading file");
       }
+    },
+    goToHomePage() {
+      this.$router.push({ name: "HomePage" });
     },
   },
 };
@@ -115,6 +111,7 @@ export default {
   font-size: 32px;
   color: white;
   margin: 0;
+  cursor: pointer;
 }
 
 .navbar-links {
