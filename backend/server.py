@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, render_template
 import os
 import zipfile
 import shutil
-from graphs.cluster_graph import create_cluster_chat_graph  # Ensure this path is correct
+from graphs.popularities_graph import generate_popularity_graph  # Import the population graph function
 import plotly.io as pio
 
 app = Flask(__name__)
@@ -69,30 +69,15 @@ def upload_file():
 
 @app.route("/api/generate_graph", methods=["POST"])
 def generate_graph():
-    data = request.json
-    graph_type = data.get('graph_type', 'cluster_chat_graph')
-
     # Dynamically find the relevant CSV file
-    file_path = None
-    for root, dirs, files in os.walk(TEMP_DIR):
-        for file in files:
-            if file.endswith('messages-dataset.csv'):  # Ensure your CSV is correctly named
-                file_path = os.path.join(root, file)
-                break
-
-    if not file_path:
-        print("File path not found.")
-        return jsonify({"error": "Required CSV file not found"}), 400
-
     try:
-        if graph_type == 'cluster_chat_graph':
-            fig = create_cluster_chat_graph(file_path)
-            graph_json = pio.to_json(fig)
-            print("Graph JSON data:", graph_json)  # Useful for debugging
-            return jsonify({"graph": graph_json}), 200
-        else:
-            print("Unknown graph type.")
-            return jsonify({"error": "Unknown graph type"}), 400
+        # Generate population graph
+        population_fig = generate_popularity_graph(TEMP_DIR)
+        population_graph_json = pio.to_json(population_fig)
+
+        # Return the population graph
+        return jsonify({"graph": population_graph_json}), 200
+
     except Exception as e:
         print(f"Error generating graph: {e}")
         return jsonify({"error": f"Failed to generate graph: {str(e)}"}), 500

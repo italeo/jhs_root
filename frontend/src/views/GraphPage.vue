@@ -14,7 +14,7 @@
 
     <!-- Graph Section -->
     <section class="graph-section">
-      <h2>Graphs</h2>
+      <h2>Popularity Graph</h2>
       <div id="graph-container" ref="graph"></div>
       <!-- This is where the graph will be rendered -->
     </section>
@@ -45,12 +45,11 @@ export default {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ graph_type: "cluster_chat_graph" }), // Ensure this matches your backend
+          body: JSON.stringify({}), // No need to specify graph_type
         });
         if (response.ok) {
           const data = await response.json();
-          this.graphData = data.graph;
-          console.log("Graph data received:", this.graphData);
+          this.graphData = JSON.parse(data.graph);
           this.renderGraph();
         } else {
           console.error("Failed to generate graph");
@@ -62,11 +61,7 @@ export default {
     renderGraph() {
       if (this.graphData) {
         const graphElement = this.$refs.graph;
-        Plotly.react(
-          graphElement,
-          JSON.parse(this.graphData).data,
-          JSON.parse(this.graphData).layout
-        );
+        Plotly.react(graphElement, this.graphData.data, this.graphData.layout);
       }
     },
   },

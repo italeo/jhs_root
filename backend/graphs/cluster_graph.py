@@ -6,6 +6,7 @@ import plotly.graph_objs as go
 import community.community_louvain as community_louvain
 import matplotlib.colors as mcolors
 import matplotlib.pyplot as plt
+import numpy as np
 
 def create_cluster_chat_graph(file_path):
     # Read the CSV file
@@ -31,10 +32,6 @@ def create_cluster_chat_graph(file_path):
     color_map = plt.get_cmap('tab20')
     colors = [mcolors.rgb2hex(color_map(i)[:3]) for i in range(color_map.N)]
 
-    # Use a fixed position layout for consistency
-    pos = nx.spring_layout(G)
-
-    # Add edges and nodes to the graph with dynamic layout updates
     frames = []
     for i, (index, row) in enumerate(df_filtered.iterrows()):
         sender = row['Name'].strip().title()
@@ -51,12 +48,18 @@ def create_cluster_chat_graph(file_path):
         # Assign a unique color to each community
         community_colors = {community: colors[i % len(colors)] for i, community in enumerate(set(partition.values()))}
 
-        # Initialize new edge trace with proper list attributes
+        # Use random layout for more dynamic positions
+        pos = nx.random_layout(G)
+
+        # Slightly perturb the positions to create frame differences
+        for node in pos:
+            pos[node] += np.random.normal(0, 0.01, 2)  # Small random movement
+
+        # Create edge trace
         edge_x, edge_y = [], []
         for edge in G.edges(data=True):
-            x0, y0 = pos.get(edge[0], (0, 0))  # Default to (0,0) if no position is found
-            x1, y1 = pos.get(edge[1], (0, 0))
-            print(f"Appending to edge_x: {x0}, {x1}")  # Debugging line
+            x0, y0 = pos[edge[0]]
+            x1, y1 = pos[edge[1]]
             edge_x += [x0, x1, None]
             edge_y += [y0, y1, None]
 
@@ -68,14 +71,13 @@ def create_cluster_chat_graph(file_path):
             mode='lines'
         )
 
-        # Initialize new node trace with proper list attributes
+        # Create node trace
         node_x, node_y, node_text, node_size, node_color = [], [], [], [], []
         for node in G.nodes():
-            x, y = pos.get(node, (0, 0))  # Default to (0,0) if no position is found
-            print(f"Appending to node_x: {x}")  # Debugging line
+            x, y = pos[node]
             node_x.append(x)
             node_y.append(y)
-            node_text.append(node)  # Append text correctly
+            node_text.append(node)
             node_size.append(10 + 2 * G.degree(node))
             node_color.append(community_colors.get(partition[node], '#000000'))
 
@@ -101,7 +103,7 @@ def create_cluster_chat_graph(file_path):
     # Add frames to the figure
     fig.frames = frames
 
-    # Layout for animation
+    # Update the layout with animation settings
     fig.update_layout(
         title='<br>Cluster graph showing player mentions',
         titlefont_size=16,
@@ -110,11 +112,15 @@ def create_cluster_chat_graph(file_path):
         margin=dict(b=0, l=0, r=0, t=40),
         xaxis=dict(showgrid=False, zeroline=False),
         yaxis=dict(showgrid=False, zeroline=False),
-        updatemenus=[dict(type="buttons", showactive=True,
-                          buttons=[dict(label="Play",
-                                        method="animate",
-                                        args=[None, dict(frame=dict(duration=500, redraw=True),
-                                                         fromcurrent=True)])])]
+        updatemenus=[dict(
+            type="buttons", 
+            showactive=True,
+            buttons=[dict(
+                label="Play",
+                method="animate",
+                args=[None, dict(frame=dict(duration=1000, redraw=True), fromcurrent=True)]
+            )]
+        )]
     )
 
     return fig
