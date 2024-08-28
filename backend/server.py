@@ -2,6 +2,8 @@ from flask import Flask, request, jsonify, render_template
 import os
 import zipfile
 import shutil
+from graphs.cluster_graph import create_cluster_chat_graph
+from graphs.sentiment_graph import generate_sentiment_graph
 from graphs.popularities_graph import generate_popularity_graph  # Import the population graph function
 import plotly.io as pio
 
@@ -67,8 +69,23 @@ def upload_file():
     else:
         return jsonify({"error": "Uploaded file is not a valid zip file"}), 400
 
-@app.route("/api/generate_graph", methods=["POST"])
-def generate_graph():
+@app.route("/api/generate_sent_graph", methods=["POST"])
+def generate_sent_graph():
+    # Dynamically find the relevant CSV file
+    try:
+        # Generate population graph
+        population_fig = generate_sentiment_graph(TEMP_DIR)
+        population_graph_json = pio.to_json(population_fig)
+
+        # Return the population graph
+        return jsonify({"graph": population_graph_json}), 200
+
+    except Exception as e:
+        print(f"Error generating graph: {e}")
+        return jsonify({"error": f"Failed to generate graph: {str(e)}"}), 500
+    
+@app.route("/api/generate_pop_graph", methods=["POST"])
+def generate_pop_graph():
     # Dynamically find the relevant CSV file
     try:
         # Generate population graph
@@ -81,6 +98,7 @@ def generate_graph():
     except Exception as e:
         print(f"Error generating graph: {e}")
         return jsonify({"error": f"Failed to generate graph: {str(e)}"}), 500
+    
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5001, debug=True)

@@ -12,11 +12,18 @@
       </div>
     </nav>
 
-    <!-- Graph Section -->
+    <!-- Graph Section for First Graph -->
     <section class="graph-section">
       <h2>Popularity Graph</h2>
-      <div id="graph-container" ref="graph"></div>
-      <!-- This is where the graph will be rendered -->
+      <div id="graph-container" ref="graph1"></div>
+      <!-- This is where the first graph will be rendered -->
+    </section>
+
+    <!-- Graph Section for Second Graph -->
+    <section class="graph-section">
+      <h2>Interaction Graph</h2>
+      <div id="graph-container-2" ref="graph2"></div>
+      <!-- This is where the second graph will be rendered -->
     </section>
   </div>
 </template>
@@ -28,11 +35,13 @@ export default {
   name: "GraphPage",
   data() {
     return {
-      graphData: null,
+      graphData1: null,
+      graphData2: null, // New data property for the second graph
     };
   },
   mounted() {
     this.fetchGraphData();
+    this.fetchGraphData2(); // Fetch data for the second graph
   },
   methods: {
     goToHomePage() {
@@ -40,7 +49,7 @@ export default {
     },
     async fetchGraphData() {
       try {
-        const response = await fetch("/api/generate_graph", {
+        const response = await fetch("/api/generate_pop_graph", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -49,19 +58,45 @@ export default {
         });
         if (response.ok) {
           const data = await response.json();
-          this.graphData = JSON.parse(data.graph);
+          this.graphData1 = JSON.parse(data.graph);
           this.renderGraph();
         } else {
-          console.error("Failed to generate graph");
+          console.error("Failed to generate popularity graph");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    },
+    async fetchGraphData2() {
+      try {
+        const response = await fetch("/api/generate_sent_graph", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({}), // No need to specify graph_type
+        });
+        if (response.ok) {
+          const data = await response.json();
+          this.graphData2 = JSON.parse(data.graph);
+          this.renderGraph2();
+        } else {
+          console.error("Failed to generate sentiment graph");
         }
       } catch (error) {
         console.error("Error:", error);
       }
     },
     renderGraph() {
-      if (this.graphData) {
-        const graphElement = this.$refs.graph;
-        Plotly.react(graphElement, this.graphData.data, this.graphData.layout);
+      if (this.graphData1) {
+        const graphElement = this.$refs.graph1;
+        Plotly.react(graphElement, this.graphData1.data, this.graphData1.layout);
+      }
+    },
+    renderGraph2() {
+      if (this.graphData2) {
+        const graphElement2 = this.$refs.graph2;
+        Plotly.react(graphElement2, this.graphData2.data, this.graphData2.layout);
       }
     },
   },
@@ -120,10 +155,8 @@ export default {
 }
 
 .graph-section {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: relative;
+  margin: 20px auto;
   width: 80%;
   max-width: 800px;
   color: white;
