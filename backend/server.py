@@ -5,12 +5,14 @@ import shutil
 from graphs.cluster_graph import create_cluster_chat_graph
 from graphs.sentiment_graph import generate_sentiment_graph
 from graphs.popularities_graph import generate_popularity_graph  # Import the population graph function
+from graphs.story_plotter import StoryPlot
 import plotly.io as pio
 
 app = Flask(__name__)
 
 # Define the path to the temp folder
 TEMP_DIR = os.path.join(os.path.dirname(__file__), 'temp')
+print(TEMP_DIR)
 
 # Ensure the temp directory exists
 if not os.path.exists(TEMP_DIR):
@@ -86,6 +88,21 @@ def generate_sent_graph():
     
 @app.route("/api/generate_pop_graph", methods=["POST"])
 def generate_pop_graph():
+    # Dynamically find the relevant CSV file
+    try:
+        # Generate population graph
+        population_fig = generate_popularity_graph(TEMP_DIR)
+        population_graph_json = pio.to_json(population_fig)
+
+        # Return the population graph
+        return jsonify({"graph": population_graph_json}), 200
+    
+    except Exception as e:
+        print(f"Error generating graph: {e}")
+        return jsonify({"error": f"Failed to generate graph: {str(e)}"}), 500
+    
+@app.route("/api/generate_story_graph", methods=["POST"])
+def generate_story_graph():
     # Dynamically find the relevant CSV file
     try:
         # Generate population graph

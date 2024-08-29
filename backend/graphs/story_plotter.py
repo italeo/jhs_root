@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec
 from PIL import Image, ImageOps
 
-from network import NodeNetwork
+from graphs.network import NodeNetwork
 
 """color gang"""
 player2color = {

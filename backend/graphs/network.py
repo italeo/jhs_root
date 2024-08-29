@@ -8,7 +8,7 @@ from matplotlib.lines import Line2D
 from time import time
 import logging
 
-from graphutils import colors, find_endpts
+from graphs.graphutils import colors, find_endpts
 
 """
 
