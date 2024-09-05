@@ -1,5 +1,0 @@
-Points:
-- consistency on one player's part led to establishment of trust
-- user error frequently led to misinformation and confusion
-    - for example, reading improper graphics or deriving incorrect information from existing data
-- 

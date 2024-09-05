@@ -90,13 +90,21 @@ export default {
     renderGraph() {
       if (this.graphData1) {
         const graphElement = this.$refs.graph1;
-        Plotly.react(graphElement, this.graphData1.data, this.graphData1.layout);
+        Plotly.react(
+          graphElement,
+          this.graphData1.data,
+          this.graphData1.layout
+        );
       }
     },
     renderGraph2() {
       if (this.graphData2) {
         const graphElement2 = this.$refs.graph2;
-        Plotly.react(graphElement2, this.graphData2.data, this.graphData2.layout);
+        Plotly.react(
+          graphElement2,
+          this.graphData2.data,
+          this.graphData2.layout
+        );
       }
     },
   },
@@ -104,14 +112,22 @@ export default {
 </script>
 
 <style scoped>
-/* Add styles similar to your other pages to maintain consistency */
+/* Ensure the body and html can grow beyond the viewport */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
 .homepage {
   background-image: url("@/assets/background2.jpg");
   background-size: cover;
   background-position: center;
-  height: 100vh;
+  min-height: 100%; /* Allow the page to grow vertically */
   color: white;
   text-align: center;
+  overflow-y: auto; /* Enable vertical scrolling if content exceeds the viewport */
 }
 
 .navbar {
