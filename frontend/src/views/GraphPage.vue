@@ -124,7 +124,7 @@ body {
   background-image: url("@/assets/background2.jpg");
   background-size: cover;
   background-position: center;
-  min-height: 100%; /* Allow the page to grow vertically */
+  min-height: 100vh; /* Ensure the page takes full viewport height */
   color: white;
   text-align: center;
   overflow-y: auto; /* Enable vertical scrolling if content exceeds the viewport */
