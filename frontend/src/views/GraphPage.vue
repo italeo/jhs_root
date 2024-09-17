@@ -35,18 +35,19 @@ export default {
   name: "GraphPage",
   data() {
     return {
-      graphData1: null,
-      graphData2: null, // New data property for the second graph
+      graphData1: null,  // Data for the first (popularity) graph
+      graphData2: null,  // Data for the second (interaction) graph
     };
   },
   mounted() {
-    this.fetchGraphData();
-    this.fetchGraphData2(); // Fetch data for the second graph
+    this.fetchGraphData();   // Fetch and render the popularity graph
+    this.fetchGraphData2();  // Fetch and render the interaction graph
   },
   methods: {
     goToHomePage() {
       this.$router.push({ name: "HomePage" });
     },
+    // Fetch the popularity graph
     async fetchGraphData() {
       try {
         const response = await fetch("/api/generate_pop_graph", {
@@ -54,7 +55,7 @@ export default {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({}), // No need to specify graph_type
+          body: JSON.stringify({}), // Request body for the popularity graph
         });
         if (response.ok) {
           const data = await response.json();
@@ -67,26 +68,28 @@ export default {
         console.error("Error:", error);
       }
     },
+    // Fetch the interaction graph
     async fetchGraphData2() {
       try {
-        const response = await fetch("/api/generate_sent_graph", {
+        const response = await fetch("/api/generate_interaction_graph", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({}), // No need to specify graph_type
+          body: JSON.stringify({}), // Request body for the interaction graph
         });
         if (response.ok) {
           const data = await response.json();
           this.graphData2 = JSON.parse(data.graph);
           this.renderGraph2();
         } else {
-          console.error("Failed to generate sentiment graph");
+          console.error("Failed to generate interaction graph");
         }
       } catch (error) {
         console.error("Error:", error);
       }
     },
+    // Render the popularity graph
     renderGraph() {
       if (this.graphData1) {
         const graphElement = this.$refs.graph1;
@@ -97,6 +100,7 @@ export default {
         );
       }
     },
+    // Render the interaction graph
     renderGraph2() {
       if (this.graphData2) {
         const graphElement2 = this.$refs.graph2;

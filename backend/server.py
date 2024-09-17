@@ -6,6 +6,7 @@ from graphs.cluster_graph import create_cluster_chat_graph
 from graphs.sentiment_graph import generate_sentiment_graph
 from graphs.popularities_graph import generate_popularity_graph  # Import the population graph function
 from graphs.story_plotter import StoryPlot
+from graphs.nodeNetwork import generate_interaction_graph  # Import the new interaction graph function
 import plotly.io as pio
 
 app = Flask(__name__)
@@ -71,21 +72,21 @@ def upload_file():
     else:
         return jsonify({"error": "Uploaded file is not a valid zip file"}), 400
 
-@app.route("/api/generate_sent_graph", methods=["POST"])
-def generate_sent_graph():
-    # Dynamically find the relevant CSV file
+# Route to generate interaction graph
+@app.route("/api/generate_interaction_graph", methods=["POST"])
+def generate_interaction_graph():
+    # Dynamically find the relevant CSV file for interaction graph
     try:
-        # Generate population graph
-        population_fig = generate_sentiment_graph(TEMP_DIR)
-        population_graph_json = pio.to_json(population_fig)
+        interaction_fig = generate_interaction_graph(TEMP_DIR)
+        interaction_graph_json = pio.to_json(interaction_fig)
 
-        # Return the population graph
-        return jsonify({"graph": population_graph_json}), 200
+        # Return the interaction graph
+        return jsonify({"graph": interaction_graph_json}), 200
 
     except Exception as e:
-        print(f"Error generating graph: {e}")
+        print(f"Error generating interaction graph: {e}")
         return jsonify({"error": f"Failed to generate graph: {str(e)}"}), 500
-    
+
 @app.route("/api/generate_pop_graph", methods=["POST"])
 def generate_pop_graph():
     # Dynamically find the relevant CSV file
@@ -100,7 +101,7 @@ def generate_pop_graph():
     except Exception as e:
         print(f"Error generating graph: {e}")
         return jsonify({"error": f"Failed to generate graph: {str(e)}"}), 500
-    
+
 @app.route("/api/generate_story_graph", methods=["POST"])
 def generate_story_graph():
     # Dynamically find the relevant CSV file
@@ -115,7 +116,6 @@ def generate_story_graph():
     except Exception as e:
         print(f"Error generating graph: {e}")
         return jsonify({"error": f"Failed to generate graph: {str(e)}"}), 500
-    
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5001, debug=True)
